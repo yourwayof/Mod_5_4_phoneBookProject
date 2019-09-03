@@ -6,24 +6,25 @@ public class Main {
 
     private static TreeMap <String, String> phoneBook = new TreeMap<>();
 
-    private static TreeMap <String, String> checkName(String string)
+    private static TreeMap <String, String> checkNumber(String string)
     {
         if (phoneBook.containsKey(string)){
-            System.out.println("Контакт по имени найден!");
-            System.out.println("Имя: " + string + " => Телефонный номер: " + phoneBook.get(string));
+            System.out.println("Контакт по номеру найден!");
+            System.out.println("Имя: " + phoneBook.get(string) + " => Телефонный номер: " + string);
         }
         else {
-            System.out.println("Контакт не найден. Будет создан новый контакт. Введите номер телефона:");
-            String phoneNumber = scanner.nextLine().replaceAll("[^0-9]","");
-            phoneBook.put(string, phoneNumber);
+            System.out.println("Контакт по номеру не найден. Будет создан новый контакт. Введите имя:");
+            //String contactName = scanner.nextLine().replaceAll("[^0-9]","");
+            String contactName = scanner.nextLine().trim();
+            phoneBook.put(string, contactName);
         }
         return phoneBook;
     }
 
-    private static TreeMap <String, String> checkNumber(String string)
+    private static TreeMap <String, String> checkName(String string)
     {
         if (phoneBook.containsValue(string)){
-            System.out.println("Контакт по номеру найден!");
+            System.out.println("Контакт по имени найден!");
             for (Map.Entry<String, String> e : phoneBook.entrySet()) {
             String key = e.getValue();
             String value = e.getKey();
@@ -37,7 +38,7 @@ public class Main {
 
     private static void printPhoneBook (TreeMap<String, String> map){
         for (String key : map.keySet()){
-            System.out.println("Имя: " + key + " => Телефонный номер: " + map.get(key));
+            System.out.println("Телефонный номер: " + key + " соответствует контакту: " + map.get(key));
         }
     }
 
@@ -75,11 +76,6 @@ public class Main {
             else {
                     System.out.println("Ошибка введения команды. Введите имя контакта, номер телефона или команду  LIST. Для выхода введите команду STOP.");
             }
-
-
-
-
         }
-
     }
 }
