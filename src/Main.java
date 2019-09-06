@@ -1,6 +1,4 @@
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Main {
 
@@ -31,14 +29,25 @@ public class Main {
             if (key.equals(string)){
             System.out.println("Телефонный номер: " + key + " => Имя: " + value);}
             }
-
+        }
+        else
+        {
+            System.out.println("Контакт по имени не найден! Будет создан новый контакт. Введите номер телефона.");
+            String contactNumber = scanner.nextLine().trim().replaceAll("[^0-9]", "");
+            phoneBook.put(contactNumber, string);
         }
         return phoneBook;
     }
 
     private static void printPhoneBook (TreeMap<String, String> map){
-        for (String key : map.keySet()){
-            System.out.println("Телефонный номер: " + key + " соответствует контакту: " + map.get(key));
+        ArrayList contactList = new ArrayList();
+
+        for (Map.Entry<String, String> e : map.entrySet()){
+                contactList.add("Контакт: " + e.getValue() + " => Номер: " + e.getKey());
+            }
+        Collections.sort(contactList);
+        for (int i = 0; i < contactList.size(); i++) {
+            System.out.println(contactList.get(i));
         }
     }
 
